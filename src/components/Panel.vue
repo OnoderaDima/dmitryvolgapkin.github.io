@@ -1,7 +1,7 @@
 <template>
     <div class="vender__panel">
         <div class="vender__panel-block">
-            <h2></h2>
+            <h2>Вставьте банкноту</h2>
             <Input/>
         </div>
     </div>
@@ -28,6 +28,24 @@ export default {
         style: solid;
         radius: 4px;
         width: 2px;        
+    }
+
+    &-block {
+        h2 {
+            color: #999999;
+            letter-spacing: 10px;
+            padding: 10px;
+            text-align: center;
+
+            font-family: 'a_LCDNovaObl', arial;
+
+            border: {
+                color: #999999;
+                style: solid;
+                radius: 4px;
+                width: 2px;        
+            }
+        }
     }
 }
 </style>

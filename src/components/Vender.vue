@@ -1,7 +1,7 @@
 <template>
     <div class="vender">
         <div class="vender__left">
-
+            <Goods/>
         </div>
         <div class="vender__right">
             <Panel/>
@@ -10,12 +10,14 @@
 </template>
 <script>
 import Panel from '@/components/Panel.vue'
+import Goods from '@/components/Goods.vue'
 
 export default {
     name: "Vender",
 
     components: {
         Panel,
+        Goods,
     },
 }
 </script>
@@ -32,7 +34,7 @@ export default {
     border-radius: 10px;
 
     &__left {
-        width: 300px;
+        min-width: 300px;
         height: 200px;
 
         border: {

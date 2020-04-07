@@ -1,0 +1,34 @@
+{
+    "goods":[
+        {
+            "name": "Шоколадка Марс",
+            "price": 60,
+            "number": 1
+        },
+        {
+            "name": "Напиток Пепси",
+            "price": 80,
+            "number": 2
+        },
+        {
+            "name": "Круасаны 7days",
+            "price": 120,
+            "number": 3
+        },
+        {
+            "name": "Чипсы Lay's",
+            "price": 93,
+            "number": 4
+        },
+        {
+            "name": "Какие-то презервативы",
+            "price": 287,
+            "number": 5
+        },
+        {
+            "name": "Греча",
+            "price": 654,
+            "number": 6
+        }                                        
+    ]
+}
