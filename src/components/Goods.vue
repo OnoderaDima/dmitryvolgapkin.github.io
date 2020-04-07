@@ -5,7 +5,7 @@
                 {{good.number}}
             </div>
             <div class="vender__good-price">
-                {{good.price}}
+                {{good.price + "&#8381;"}}
             </div>
         </div>      
     </div>
@@ -14,9 +14,9 @@
 export default {
     name: "Goods",
 
-    computed: {
+    methods: {
         getImageUrl(image){
-            return "background-image:url(..assets/"+image+")";
+            return "background-image:url(" + require("../assets/"+image) + ")";
         },
     },
 
@@ -80,6 +80,8 @@ export default {
             position: absolute;
             bottom: 0;
             width: 100%;
+
+            background-color: rgb(255, 223, 78);
 
             text: {
                 transform: uppercase;

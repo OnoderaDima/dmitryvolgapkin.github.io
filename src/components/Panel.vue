@@ -2,7 +2,7 @@
     <div class="vender__panel">
         <div class="vender__panel-block">
             <h2>Вставьте банкноту</h2>
-            <Input/>
+            <Input type="number" max="10"/>
         </div>
     </div>
 </template>

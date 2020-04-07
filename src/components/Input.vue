@@ -1,14 +1,27 @@
 <template>
-    <input class="vender__input" :type="type" :value="value" :maxlength="max"> 
+    <input class="vender__input" :type="type" v-model="value" :maxlength="max" @keypress="insertBanknote()"> 
 </template>
 <script>
 export default {
     name: "Input",
 
+    data() {
+        return {
+            value: "",
+        }
+    },
+
     props: {
         type: String,
-        value: String,
         max: Number,
+    },
+
+    methods: {
+        insertBanknote() {
+            if (event.keyCode == 13){
+                this.$store.dispatch('insertBanknote', {value: this.value});
+            }
+        }
     },
 }
 </script>
