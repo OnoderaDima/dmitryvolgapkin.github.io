@@ -2,31 +2,37 @@
     "goods":[
         {
             "name": "Шоколадка Марс",
+            "image": "good_1.png",
             "price": 60,
             "number": 1
         },
         {
             "name": "Напиток Пепси",
+            "image": "good_2.png",            
             "price": 80,
             "number": 2
         },
         {
             "name": "Круасаны 7days",
+            "image": "good_3.png",
             "price": 120,
             "number": 3
         },
         {
             "name": "Чипсы Lay's",
+            "image": "good_4.png",            
             "price": 93,
             "number": 4
         },
         {
             "name": "Какие-то презервативы",
+            "image": "good_5.png",            
             "price": 287,
             "number": 5
         },
         {
             "name": "Греча",
+            "image": "good_6.png",            
             "price": 654,
             "number": 6
         }                                        

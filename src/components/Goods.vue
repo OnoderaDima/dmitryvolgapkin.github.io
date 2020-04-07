@@ -1,27 +1,28 @@
 <template>
     <div class="vender__goods">
-        <div class="vender__good">
+        <div class="vender__good" v-for="good in goodList" :key="good.number" :style="getImageUrl(good.image)">
             <div class="vender__good-number">
-                1
+                {{good.number}}
             </div>
             <div class="vender__good-price">
-                600р.
+                {{good.price}}
             </div>
-        </div>
-
-        <div class="vender__good">
-            <div class="vender__good-number">
-                2
-            </div>
-            <div class="vender__good-price">
-                300р.
-            </div>
-        </div>        
+        </div>      
     </div>
 </template>
 <script>
 export default {
     name: "Goods",
+
+    computed: {
+        getImageUrl(image){
+            return "background-image:url(..assets/"+image+")";
+        },
+    },
+
+    props: {
+        goodList: Array,
+    }
 }
 </script>
 <style lang="scss">

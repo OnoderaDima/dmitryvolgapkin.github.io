@@ -1,7 +1,7 @@
 <template>
     <div class="vender">
         <div class="vender__left">
-            <Goods/>
+            <Goods :goodList="goods"/>
         </div>
         <div class="vender__right">
             <Panel/>
@@ -14,6 +14,10 @@ import Goods from '@/components/Goods.vue'
 
 export default {
     name: "Vender",
+
+    props: {
+        goods: Array,
+    },
 
     components: {
         Panel,
@@ -35,7 +39,6 @@ export default {
 
     &__left {
         min-width: 300px;
-        height: 200px;
 
         border: {
             color: #999999;
