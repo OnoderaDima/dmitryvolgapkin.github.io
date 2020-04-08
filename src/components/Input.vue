@@ -1,5 +1,5 @@
 <template>
-    <input class="vender__input" :type="type" v-model="value" :maxlength="max" @keypress="insertBanknote()"> 
+    <input class="vender__input" :type="type" v-model="value" :maxlength="max" :disabled="disabled" @keypress="onKeyPress"> 
 </template>
 <script>
 export default {
@@ -13,16 +13,17 @@ export default {
 
     props: {
         type: String,
-        max: Number,
+        max: String,
+        disabled: Boolean,
     },
 
     methods: {
-        insertBanknote() {
-            if (event.keyCode == 13){
-                this.$store.dispatch('insertBanknote', {value: this.value});
-            }
-        }
+        onKeyPress () {
+            this.$emit('enter', {
+                value: this.value,
+         })
     },
+}
 }
 </script>
 <style lang="scss">

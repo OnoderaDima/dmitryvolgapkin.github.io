@@ -35,6 +35,7 @@ export default {
         height: 150px;
         width: 150px;
         margin: 30px;
+        box-sizing: border-box;
 
         border: {
             width: 2px;

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Vender :goods="goods"/>
+    <Vender :goods="getData()"/>
   </div>
 </template>
 
@@ -17,21 +17,12 @@ export default {
   },
 
   created() {
-    this.getGoods();
+    this.$store.dispatch("getGoods",{jsonUrl: "https://raw.githubusercontent.com/OnoderaDima/vending/master/goods.json"});
   },
 
   methods: {
-    async getGoods() {
-      let response = await fetch('https://raw.githubusercontent.com/OnoderaDima/vending/master/goods.json');
-
-      if (response.ok) {
-        let json = await response.json();
-
-        this.goods = json.goods;
-      }
-      else {
-        console.log("Ошибка HTTP: " + response.status);
-      }
+    getData() { 
+      return this.$store.getters.getGoods;
     },
   },
 

@@ -1,9 +1,15 @@
 <template>
     <div class="vender__panel">
-        <div class="vender__panel-block">
-            <h2>Вставьте банкноту</h2>
-            <Input type="number" max="10"/>
-        </div>
+        <form>
+            <div class="vender__panel-block">
+                <h2>Вставьте банкноту</h2>
+                <Input type="number" max="10" :disabled="(getMachineMode()==0?false:true)" @enter="insertBanknote"/>
+             </div>
+            <div class="vender__panel-block">
+                <h2>Введите номер товара</h2>
+                <Input type="number" max="10" :disabled="(getMachineMode()==1?false:true)" @enter="chooseGood"/>
+            </div> 
+        </form>       
     </div>
 </template>
 <script>
@@ -11,6 +17,24 @@ import Input from '@/components/Input.vue'
 
 export default {
     name: "Panel",
+
+    methods: {
+        insertBanknote(data) { 
+            if (event.keyCode == 13){         
+                this.$store.dispatch("insertBanknote", {value: data.value});
+            }
+        },
+
+        chooseGood(data) {
+            if (event.keyCode == 13){         
+                this.$store.dispatch("chooseGood", {value: data.value});
+            }
+        },
+
+        getMachineMode() {
+            return this.$store.getters.getMachineMode;
+        },
+    },
 
     components: {
         Input,
