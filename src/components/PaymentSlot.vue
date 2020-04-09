@@ -1,7 +1,7 @@
 <template>
     <div :class="{slot:true,slot__active:isActive()}">
         <h3>{{getMessage()}}</h3>
-        <Input type="number" max="10" @enter="insertBanknote" :disabled="isDisabled()"/> 
+        <Input type="number" @enter="insertBanknote" :disabled="isDisabled()"/> 
     </div>   
 </template>
 <script>
