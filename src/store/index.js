@@ -65,6 +65,7 @@ export default new Vuex.Store({
             })   
         },   
         takeGood(ctx) {
+            ctx.commit('updatePayment',0);
             ctx.commit('updateChange',[]);
             ctx.commit('updateGood',null);
         },
@@ -84,6 +85,12 @@ export default new Vuex.Store({
         updateChange(state, change) {
             state.change = change;
         },
+        updatePaymentInput(state, value) {
+            state.paymentInput = value;
+        },
+        updateGoodInput(state, value) {
+            state.goodInput = value;
+        },
     },
     state: {
         // параметры
@@ -96,7 +103,10 @@ export default new Vuex.Store({
         good: null,
         // сдача
         change: [],
-
+        // поле ввода банкнот
+        paymentInput: 0,
+        // поле ввода номера товара
+        goodInput: 0,
     },
     getters: {
         getPayment(state) {
@@ -113,6 +123,12 @@ export default new Vuex.Store({
         },
         getChange(state) {
             return state.change;
+        },
+        getPaymentInput(state) {
+            return state.getPaymentInput;
+        },
+        getGoodInput(state) {
+            return state.goodInput;
         },
     },
 })
