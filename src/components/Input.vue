@@ -1,5 +1,5 @@
 <template>
-    <input class="vender__input" :type="type" v-model="value" :maxlength="max" :disabled="disabled" @keypress="onKeyPress"> 
+    <input class="input" :type="type" v-model="value" min="0" :max="max" :disabled="disabled" @keypress="onKeyPress"> 
 </template>
 <script>
 export default {
@@ -13,7 +13,7 @@ export default {
 
     props: {
         type: String,
-        max: String,
+        max: Number,
         disabled: Boolean,
     },
 
@@ -27,7 +27,7 @@ export default {
 }
 </script>
 <style lang="scss">
-.vender__input {
+.input {
     padding: 10px;
     text-transform: uppercase;
     letter-spacing: 10px;
@@ -35,7 +35,7 @@ export default {
     background-color: #999999;
 
     font: {
-        size: 32px;
+        size: 16px;
         family: 'a_LCDNovaObl', arial;
     }
 
@@ -43,6 +43,17 @@ export default {
         width: 2px;
         color: #666;
         radius: 5px;
+        style: solid;
     }
+}
+
+.input:focus {
+    outline: none;
+    border-color: rgb(255, 221, 29);
+}
+
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }
 </style>

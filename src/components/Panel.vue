@@ -2,42 +2,48 @@
     <div class="vender__panel">
         <form>
             <div class="vender__panel-block">
-                <h2>Вставьте банкноту</h2>
-                <Input type="number" max="10" :disabled="(getMachineMode()==0?false:true)" @enter="insertBanknote"/>
+                <PaymentSlot/>
              </div>
             <div class="vender__panel-block">
-                <h2>Введите номер товара</h2>
-                <Input type="number" max="10" :disabled="(getMachineMode()==1?false:true)" @enter="chooseGood"/>
+                <GoodSlot/>
             </div> 
+            <div class="vender__panel-block vender__panel-block_double">
+                <CoinsOutput/>
+                <GoodOutput/>
+            </div>    
+            <div class="vender__panel-block">
+                <Button :disabled="isActive()" @click="takeGood()" value="Взять товар"/>
+            </div>         
         </form>       
     </div>
 </template>
 <script>
-import Input from '@/components/Input.vue'
+import PaymentSlot from '@/components/PaymentSlot.vue'
+import GoodSlot from '@/components/GoodSlot.vue'
+import CoinsOutput from '@/components/CoinsOutput.vue'
+import GoodOutput from '@/components/GoodOutput.vue'
+import Button from '@/components/Button.vue'
 
 export default {
     name: "Panel",
 
     methods: {
-        insertBanknote(data) { 
-            if (event.keyCode == 13){         
-                this.$store.dispatch("insertBanknote", {value: data.value});
-            }
+        isActive() { 
+            if (!this.$store.getters.getGood) 
+                return true;
+            return false;
         },
-
-        chooseGood(data) {
-            if (event.keyCode == 13){         
-                this.$store.dispatch("chooseGood", {value: data.value});
-            }
-        },
-
-        getMachineMode() {
-            return this.$store.getters.getMachineMode;
+        takeGood() {
+            this.$store.dispatch("takeGood");
         },
     },
 
     components: {
-        Input,
+        PaymentSlot,
+        GoodSlot,
+        CoinsOutput,
+        GoodOutput,
+        Button,
     },
 }
 </script>
@@ -55,20 +61,20 @@ export default {
     }
 
     &-block {
-        h2 {
-            color: #999999;
-            letter-spacing: 10px;
-            padding: 10px;
-            text-align: center;
+        padding: 10px;
 
-            font-family: 'a_LCDNovaObl', arial;
+        &_double {
+            display: flex;
+            justify-content: space-around;
+        }
 
-            border: {
-                color: #999999;
-                style: solid;
-                radius: 4px;
-                width: 2px;        
-            }
+        input.input {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        a.button {
+            width: 100%;
         }
     }
 }

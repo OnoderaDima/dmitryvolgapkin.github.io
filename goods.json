@@ -13,25 +13,25 @@
             "number": 2
         },
         {
-            "name": "Круасаны 7days",
+            "name": "Чипсы Lay's",
             "image": "good_3.png",
             "price": 120,
             "number": 3
         },
         {
-            "name": "Чипсы Lay's",
+            "name": "Круасаны 7Day's",
             "image": "good_4.png",            
             "price": 93,
             "number": 4
         },
         {
-            "name": "Какие-то презервативы",
+            "name": "Греча",
             "image": "good_5.png",            
             "price": 287,
             "number": 5
         },
         {
-            "name": "Греча",
+            "name": "Презерватив",
             "image": "good_6.png",            
             "price": 654,
             "number": 6

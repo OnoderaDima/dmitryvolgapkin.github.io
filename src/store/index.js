@@ -8,8 +8,7 @@ const MODE_CHOOSING_GOODS = 1;
 const MODE_GETTING_GOODS = 2;
 
 const validBanknotes = [50, 100, 200, 500, 1000];
-//const coins = [1, 2, 5, 10];
-
+const coins = [1, 2, 5, 10];
 
 export default new Vuex.Store({
     actions: {
@@ -24,20 +23,51 @@ export default new Vuex.Store({
             else {
               console.log("Ошибка HTTP: " + response.status);
             }
+        },     
+        insertBanknote({ commit }, banknote) {
+            return new Promise((resolve, reject) => {
+                if (validBanknotes.indexOf(parseInt(banknote.value))+1) {
+                    commit('updatePayment', this.getters.getPayment + parseInt(banknote.value));
+                    resolve(true);
+                }
+                else {
+                    reject(new Error("Не валидная банкнота!"))
+                }
+            })     
         },        
-        insertBanknote(ctx, banknote) {
-            if (validBanknotes.indexOf(parseInt(banknote.value))+1) {
-                ctx.commit('updatePayment',banknote.value);
-            }
-            else {
-                alert("Не валидная банкнота");
-            }         
+        chooseGood({ commit }, good) {
+            return new Promise((resolve, reject) => {
+                let boughtGood = this.getters.getGoods.find(i=>i.number==parseInt(good.value));
+
+                // если товар с данным номером найден
+                if (boughtGood) {
+                    let priceChange = this.getters.getPayment - boughtGood.price;
+
+                    if (priceChange >= 0) {
+                        let change = coins.sort((a, b)=>b - a).map(coin=>{
+                            let count = Math.floor(priceChange/coin);
+                            priceChange = priceChange%coin;
+                        
+                            return {coin, count};
+                        });
+                        commit('updatePayment',0);
+                        commit('updateGood',boughtGood);
+                        commit('updateChange',change);
+                        resolve(true);
+                    }    
+                    else {
+                        reject(new Error("Нехватка средств!"))
+                    }             
+                }
+                else {
+                    reject(new Error("Неверный номер товара!"))
+                }
+            })   
+        },   
+        takeGood(ctx) {
+            ctx.commit('updateChange',[]);
+            ctx.commit('updateGood',null);
         },
-        chooseGood(ctx, good) {
-            if (this.getters.getGoods.findIndex(i=>i.number==parseInt(good.value))+1) {
-                ctx.commit('uploadData',good.value);
-            }
-        },        
     },
     mutations: {
         uploadData(state, data) {
@@ -51,6 +81,9 @@ export default new Vuex.Store({
             state.mode = MODE_GETTING_GOODS;
             state.good = good;
         },
+        updateChange(state, change) {
+            state.change = change;
+        },
     },
     state: {
         // параметры
@@ -60,15 +93,26 @@ export default new Vuex.Store({
         // платеж
         payment: 0,
         // выбранный товар
-        good: 0,
+        good: null,
+        // сдача
+        change: [],
 
     },
     getters: {
+        getPayment(state) {
+            return state.payment;
+        },
         getGoods(state) {
             return state.data.goods;
         },
+        getGood(state) {
+            return state.good;
+        },
         getMachineMode(state) {
             return state.mode;
+        },
+        getChange(state) {
+            return state.change;
         },
     },
 })

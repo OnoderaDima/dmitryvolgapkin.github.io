@@ -28,7 +28,9 @@ export default {
 <style lang="scss">
 .vender__goods {
     display: flex;
+    justify-content: space-around;
     flex-wrap: wrap;
+    width: 100%;
 
     .vender__good {
         position: relative;

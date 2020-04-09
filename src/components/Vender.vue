@@ -38,8 +38,9 @@ export default {
     border-radius: 10px;
 
     &__left {
-        min-width: 300px;
-
+        width: 500px;
+        margin: 5px;
+        
         border: {
             color: #999999;
             style: solid;
@@ -48,6 +49,11 @@ export default {
         }
 
         background-color: #FFFFFF;
+    }
+
+    &__right {
+        width: 300px;
+        margin: 5px;
     }
 }
 </style>
