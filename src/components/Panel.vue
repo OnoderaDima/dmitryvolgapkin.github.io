@@ -1,6 +1,6 @@
 <template>
     <div class="vender__panel">
-        <form>
+        <form id="venderForm">
             <div class="vender__panel-block">
                 <PaymentSlot/>
              </div>
