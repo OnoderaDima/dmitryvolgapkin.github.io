@@ -5,7 +5,7 @@
 npm install -g @vue/cli
 npm install vuex
 npm install sass sass-loader
-
+vue create "vender"
 ```
 
 ### Запуск
