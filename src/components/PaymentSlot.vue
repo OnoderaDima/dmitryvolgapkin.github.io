@@ -1,7 +1,7 @@
 <template>
     <div :class="{slot:true,slot__active:isActive()}">
         <h3>{{getMessage()}}</h3>
-        <input id="paymentInput" class="input" type="number" :disabled="isDisabled()" @keypress="insertBanknote()" v-model="value"> 
+        <input id="paymentInput" class="input" type="number" :disabled="isDisabled()" @onfocus="isActive()" @keypress="insertBanknote()" v-model="value"> 
     </div>   
 </template>
 <script>
@@ -53,10 +53,12 @@ export default {
             if (event.keyCode == 13){         
                 this.$store.dispatch("insertBanknote", {value:this.banknote}).catch(
                     error => {
+                        
                         this.error = error;
                         setTimeout(()=>this.error=null,2500);
                     }
                 );
+
             }
         },
     },    
