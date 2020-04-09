@@ -1,19 +1,31 @@
 <template>
     <div :class="{slot:true,slot__active:isActive()}">
         <h3>{{getMessage()}}</h3>
-        <Input type="number" @enter="insertBanknote" :disabled="isDisabled()"/> 
+        <input id="paymentInput" class="input" type="number" :disabled="isDisabled()" @keypress="insertBanknote()" v-model="value"> 
     </div>   
 </template>
 <script>
-import Input from '@/components/Input.vue'
-
 export default {
     name: "PaymentSlot",
 
     data() {
         return {
             error: null,
+            banknote: 0,
         }
+    },
+
+    computed: {
+
+        value: {
+            get: function () {
+                return this.$store.getters.getPaymentInput;
+            },
+            set: function (newValue) { 
+                this.banknote = newValue;
+                this.$store.commit('updatePaymentInput', newValue);
+            }
+        },
     },
 
     methods: {
@@ -37,9 +49,9 @@ export default {
                 return this.error;
             } 
         },
-        insertBanknote(data) { 
+        insertBanknote() {
             if (event.keyCode == 13){         
-                this.$store.dispatch("insertBanknote", {value: data.value}).catch(
+                this.$store.dispatch("insertBanknote", {value:this.banknote}).catch(
                     error => {
                         this.error = error;
                         setTimeout(()=>this.error=null,2500);
@@ -48,10 +60,6 @@ export default {
             }
         },
     },    
-
-    components: {
-        Input,
-    },
 }
 </script>
 <style lang="scss">
@@ -95,4 +103,34 @@ export default {
             }
         } 
     }
+
+    .input {
+        padding: 10px;
+        text-transform: uppercase;
+        letter-spacing: 10px;
+        color: #333333;
+        background-color: #999999;
+
+        font: {
+            size: 16px;
+            family: 'a_LCDNovaObl', arial;
+        }
+
+        border: {
+            width: 2px;
+            color: #666;
+            radius: 5px;
+            style: solid;
+        }
+    }
+
+    .input:focus {
+        outline: none;
+        border-color: rgb(255, 221, 29);
+    }
+
+    .input::-webkit-outer-spin-button,
+    .input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }    
 </style>
