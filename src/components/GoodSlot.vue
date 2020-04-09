@@ -1,20 +1,31 @@
 <template>
     <div :class="{slot:true,slot__active:isActive()}">
         <h3>{{getMessage()}}</h3>
-        <Input type="number" @enter="chooseGood" :disabled="isDisabled()"/> 
+        <input id="goodInput" class="input" type="number" @keypress="chooseGood()" :disable="isDisabled()" v-model="value">
     </div>   
 </template>
 <script>
-import Input from '@/components/Input.vue'
-
 export default {
     name: "PaymentSlot",
 
     data() {
         return {
             error: null,
+            good: 0,
         }
     },
+
+    computed: {
+        value: {
+            get: function () {
+                return this.$store.getters.getGoodInput;
+            },
+            set: function (newValue) {  
+                this.good = newValue;
+                this.$store.commit('updateGoodInput', newValue);
+            }
+        },
+    },    
 
     methods: {
         isDisabled() {
@@ -37,10 +48,13 @@ export default {
                 return this.error;
             } 
         },        
-        chooseGood(data) {
+        chooseGood() {
             if (event.keyCode == 13){         
-                this.$store.dispatch("chooseGood", {value: data.value}).then(
-                    () => document.querySelector('form#venderForm').reset(),
+                this.$store.dispatch("chooseGood", {value: this.good}).then(
+                    () => {
+                        this.$store.commit('updatePaymentInput', 0);
+                        this.$store.commit('updateGoodInput', 0);
+                    },
                     error => {
                         this.error = error;
                         setTimeout(()=>this.error=null,2500);
@@ -49,10 +63,6 @@ export default {
             }
         },        
     },    
-
-    components: {
-        Input,
-    },
 }
 </script>
 <style lang="scss">
@@ -96,4 +106,34 @@ export default {
             }
         }        
     }
+
+    .input {
+        padding: 10px;
+        text-transform: uppercase;
+        letter-spacing: 10px;
+        color: #333333;
+        background-color: #999999;
+
+        font: {
+            size: 16px;
+            family: 'a_LCDNovaObl', arial;
+        }
+
+        border: {
+            width: 2px;
+            color: #666;
+            radius: 5px;
+            style: solid;
+        }
+    }
+
+    .input:focus {
+        outline: none;
+        border-color: rgb(255, 221, 29);
+    }
+
+    .input::-webkit-outer-spin-button,
+    .input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }        
 </style>
