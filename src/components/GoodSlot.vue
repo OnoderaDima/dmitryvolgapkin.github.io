@@ -1,7 +1,7 @@
 <template>
     <div :class="{slot:true,slot__active:isActive()}">
         <h3>{{getMessage()}}</h3>
-        <input id="goodInput" class="input" type="number" @keypress="chooseGood()" :disable="isDisabled()" v-model="value">
+        <input id="goodInput" class="input" type="number" @onfocus="isActive()" @keypress="chooseGood()" :disable="isDisabled()" v-model="value">
     </div>   
 </template>
 <script>
