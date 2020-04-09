@@ -39,7 +39,8 @@ export default {
         },        
         chooseGood(data) {
             if (event.keyCode == 13){         
-                this.$store.dispatch("chooseGood", {value: data.value}).catch(
+                this.$store.dispatch("chooseGood", {value: data.value}).then(
+                    () => document.querySelector('form#venderForm').reset(),
                     error => {
                         this.error = error;
                         setTimeout(()=>this.error=null,2500);
