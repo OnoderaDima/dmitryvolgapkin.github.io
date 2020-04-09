@@ -1,16 +1,19 @@
 # vender
 
-## Project setup
+## Установка
 ```
-npm install
+npm install -g @vue/cli
+npm install vuex
+npm install sass sass-loader
+
 ```
 
-### Compiles and hot-reloads for development
+### Запуск
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Сборка
 ```
 npm run build
 ```
