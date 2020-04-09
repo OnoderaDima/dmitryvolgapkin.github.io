@@ -125,7 +125,7 @@ export default new Vuex.Store({
             return state.change;
         },
         getPaymentInput(state) {
-            return state.getPaymentInput;
+            return state.paymentInput;
         },
         getGoodInput(state) {
             return state.goodInput;
