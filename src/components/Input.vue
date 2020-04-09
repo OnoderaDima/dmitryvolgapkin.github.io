@@ -1,5 +1,5 @@
 <template>
-    <input class="input" :type="type" v-model="value" min="0" :max="max" :disabled="disabled" @keypress="onKeyPress"> 
+    <input class="input" :type="type" v-model="value" :disabled="disabled" @keypress="onKeyPress"> 
 </template>
 <script>
 export default {
@@ -13,7 +13,6 @@ export default {
 
     props: {
         type: String,
-        max: Number,
         disabled: Boolean,
     },
 
